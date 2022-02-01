@@ -18,9 +18,9 @@ const sketch = (p5: P5) => {
   };
 
   p5.setup = () => {
-    board = new Board(img, size, 3, 3)
+    p5.noLoop();
     p5.createCanvas(size.x, size.y);
-    p5.background(90);
+    board = new Board(img, size, 3, 3)
     board.shuffle();
     board.draw(p5);
   };
@@ -29,8 +29,8 @@ const sketch = (p5: P5) => {
     // Ignoring presses outside the canvas.
     if (e.x > size.x || e.y > size.y) return;
 
-    const col = p5.floor(e.x / board.tileSize.x);
-    const row = p5.floor(e.y / board.tileSize.y);
+    const row = p5.floor(e.x / board.tileSize.x);
+    const col = p5.floor(e.y / board.tileSize.y);
     board.move(col, row, p5);
   };
 };

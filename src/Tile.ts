@@ -16,19 +16,23 @@ export class Tile {
     this._isEmpty = false;
   }
 
-  get size () {
+  get size() {
     return this._size;
   }
 
-  set position (position: Vector) {
+  get position() {
+    return this._position;
+  }
+
+  set position(position: Vector) {
     this._position = position;
   }
 
-  set isEmpty (isEmpty: boolean) {
+  set isEmpty(isEmpty: boolean) {
     this._isEmpty = isEmpty;
   }
 
-  get isEmpty () {
+  get isEmpty() {
     return this._isEmpty;
   }
 

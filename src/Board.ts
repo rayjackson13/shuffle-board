@@ -64,8 +64,8 @@ export class Board {
       }
 
       tile.position = {
-        x: (index % this._columns) * this._tileSize.x,
-        y: p5.floor(index / this._rows) * this._tileSize.y,
+        x: Math.floor(index / this._rows) * this._tileSize.y,
+        y: (index % this._columns) * this._tileSize.x,
       };
       tile.draw(p5);
     });
