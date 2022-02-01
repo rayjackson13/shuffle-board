@@ -1,0 +1,28 @@
+{
+  "name": "shuffle-broard",
+  "version": "1.0.0",
+  "description": "A shuffle puzzle game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve"
+  },
+  "author": "rayjackson13",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/p5": "^1.4.0",
+    "css-loader": "^6.5.1",
+    "mini-css-extract-plugin": "^2.5.3",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "p5": "^1.4.0"
+  }
+}
