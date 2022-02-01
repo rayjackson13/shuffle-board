@@ -6,7 +6,7 @@ const buildPath = path.resolve(__dirname, 'build');
 
 module.exports = {
   entry: './src/index.ts',
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
