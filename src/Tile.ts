@@ -6,12 +6,14 @@ export class Tile {
   private _originalPosition: Vector;
   private _size: Vector;
   private _position: Vector;
+  private _isEmpty: boolean;
 
   constructor(image: P5.Image, position: Vector, size: Vector) {
     this._image = image;
     this._originalPosition = position;
     this._position = position;
     this._size = size;
+    this._isEmpty = false;
   }
 
   get size () {
@@ -20,6 +22,14 @@ export class Tile {
 
   set position (position: Vector) {
     this._position = position;
+  }
+
+  set isEmpty (isEmpty: boolean) {
+    this._isEmpty = isEmpty;
+  }
+
+  get isEmpty () {
+    return this._isEmpty;
   }
 
   draw = (p5: P5) => {
