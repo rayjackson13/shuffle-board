@@ -44,10 +44,12 @@ export class Board {
 
   draw = (p5: P5) => {
     this.tiles.forEach((tile, index) => {
-      const x = (index % this.cols) * tile.size.x;
-      console.log('draw', x);
-      const y = p5.floor(index / this.rows) * tile.size.y;
-      tile.draw(p5, x, y);
+      const position = {
+        x: (index % this.cols) * tile.size.x,
+        y: p5.floor(index / this.rows) * tile.size.y,
+      }
+      tile.position = position;
+      tile.draw(p5);
     });
   };
 
