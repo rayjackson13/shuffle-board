@@ -28,6 +28,21 @@ export class Board {
     return this._tileSize;
   }
 
+  get isSolved (): boolean {
+    return this._tiles.reduce((total, current) => {
+      if (!total) return false;
+
+      if (
+        current.position.x === current.originalPosition.x
+        && current.position.y === current.originalPosition.y
+      ) {
+        return true;
+      }
+
+      return false;
+    }, true);
+  }
+
   private loadTiles = () => {
     const tileArray = [];
     const size = this._tileSize;
@@ -57,8 +72,8 @@ export class Board {
 
   draw = (p5: P5) => {
     p5.background(0);
-    p5.image(this._image, 0, 0, this._size.x, this._size.y);
-    p5.fill('rgba(0, 0, 0, 0.95)');
+    // p5.image(this._image, 0, 0, this._size.x, this._size.y);
+    // p5.fill('rgba(0, 0, 0, 0.95)');
     p5.rect(0, 0, this._size.x, this._size.y);
     this._tiles.forEach((tile, index) => {
       if (!!tile.isEmpty) {
@@ -72,6 +87,8 @@ export class Board {
       };
       tile.draw(p5);
     });
+
+    console.log('is solved', this.isSolved);
   };
 
   /**
@@ -103,7 +120,7 @@ export class Board {
     this.updateBlankPosition();
 
     // Performing a random move N times.
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1; i++) {
       const { x, y } = this._blankPosition;
 
       // Getting array of existing neighbours.

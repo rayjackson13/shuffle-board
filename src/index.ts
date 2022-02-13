@@ -12,18 +12,46 @@ const sketch = (p5: P5) => {
   };
   let img: P5.Image;
   let board: Board;
+  let finishOpacity = 0;
+  let finishTimeout = 100;
+
+  const setupBoard = (p5: P5) => {
+    p5.background(0);
+    board = new Board(img, size, 3, 3)
+    board.shuffle(p5);
+    board.draw(p5);
+  }
 
   p5.preload = () => {
     img = p5.loadImage(IMG_URL);
   };
 
   p5.setup = () => {
-    p5.noLoop();
+    p5.frameRate(60);
     p5.createCanvas(size.x, size.y);
-    board = new Board(img, size, 3, 3)
-    board.shuffle(p5);
-    board.draw(p5);
+    setupBoard(p5);
   };
+
+  p5.draw = () => {
+    console.log(board.isSolved)
+    if (board.isSolved) {
+      console.log(finishTimeout);
+      if (finishTimeout > 0) {
+        p5.tint(255, 255, 255, finishOpacity)
+        p5.image(img, 0, 0, size.x, size.y);
+        if (finishOpacity < 255) finishOpacity += 2;
+
+        finishTimeout--;
+      } else {
+        // Reset tint.
+        p5.tint(255);
+
+        finishTimeout = 100;
+        finishOpacity = 0;
+        setupBoard(p5);
+      }
+    }
+  }
 
   p5.mousePressed = (e: MouseEvent) => {
     // Ignoring presses outside the canvas.

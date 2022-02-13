@@ -30,6 +30,10 @@ export class Tile {
     this._position = position;
   }
 
+  get originalPosition() {
+    return this._originalPosition;
+  }
+
   set isEmpty(isEmpty: boolean) {
     this._isEmpty = isEmpty;
   }
