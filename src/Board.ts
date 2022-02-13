@@ -100,15 +100,20 @@ export class Board {
     this.updateBlankPosition();
 
     // Performing a random move N times.
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 100; i++) {
       const { x, y } = this._blankPosition;
+
+      // Getting array of existing neighbours.
       const neighbours = [
-        this.getTile(x, y - 1), // top
-      ];
-      console.log(neighbours);
-      const randomCol = Math.floor(Math.random() * this._columns);
-      const randomRow = Math.floor(Math.random() * this._rows);
-      this.move(randomCol, randomRow, p5);
+        this.getTile(x - 1, y), // top
+        this.getTile(x, y + 1), // right
+        this.getTile(x + 1, y), // bottom
+        this.getTile(x, y - 1), // left
+      ].filter(val => !!val);
+      
+      // Randomly picking one neighbour tile and moving it.
+      const { position } = neighbours[Math.floor(Math.random() * neighbours.length)];
+      this.move(position.x, position.y, p5);
     }
   };
 

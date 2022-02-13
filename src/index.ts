@@ -21,7 +21,7 @@ const sketch = (p5: P5) => {
     p5.noLoop();
     p5.createCanvas(size.x, size.y);
     board = new Board(img, size, 3, 3)
-    board.shuffle();
+    board.shuffle(p5);
     board.draw(p5);
   };
 
