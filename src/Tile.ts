@@ -1,6 +1,8 @@
 import * as P5 from "p5";
 import { Vector } from "./typed";
 
+const STROKE = 1;
+
 export class Tile {
   private _image: P5.Image;
   private _originalPosition: Vector;
@@ -37,13 +39,19 @@ export class Tile {
   }
 
   draw = (p5: P5) => {
-    p5.strokeWeight(4);
-    p5.stroke(0);
     const canvasPosition = {
       x: this._position.x * this.size.x,
       y: this._position.y * this.size.y,
     }
+    p5.noStroke();
+    p5.fill(0);
     p5.rect(canvasPosition.x, canvasPosition.y, this._size.x, this._size.y);
-    p5.image(this._image, canvasPosition.x, canvasPosition.y);
+    p5.image(
+      this._image, 
+      canvasPosition.x + STROKE, 
+      canvasPosition.y + STROKE, 
+      this._size.x - STROKE, 
+      this._size.y - STROKE
+      );
   };
 }

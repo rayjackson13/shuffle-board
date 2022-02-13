@@ -56,7 +56,10 @@ export class Board {
   }
 
   draw = (p5: P5) => {
-    p5.background(90);
+    p5.background(0);
+    p5.image(this._image, 0, 0, this._size.x, this._size.y);
+    p5.fill('rgba(0, 0, 0, 0.9)');
+    p5.rect(0, 0, this._size.x, this._size.y);
     this._tiles.forEach((tile, index) => {
       if (!!tile.isEmpty) {
         this.updateBlankPosition();
