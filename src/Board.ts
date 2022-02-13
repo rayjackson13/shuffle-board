@@ -36,8 +36,8 @@ export class Board {
       for (let j = 0; j < this._rows; j++) {
         const image = this._image.get(i * size.x, j * size.y, size.x, size.y);
         const position = {
-          x: i * size.x,
-          y: j * size.y
+          x: i,
+          y: j
         };
         const tile = new Tile(image, position, size);
         tileArray.push(tile);
@@ -64,14 +64,20 @@ export class Board {
       }
 
       tile.position = {
-        x: Math.floor(index / this._rows) * this._tileSize.y,
-        y: (index % this._columns) * this._tileSize.x,
+        x: Math.floor(index / this._rows),
+        y: index % this._columns,
       };
       tile.draw(p5);
     });
   };
 
-  shuffle = () => {
+  /**
+   * @deprecated
+   * This approach doesn't work as most of the times it leads to the puzzle
+   * being unsolveable. Maybe I should look into Fisher–Yates Shuffle in the future.
+   * https://bost.ocks.org/mike/shuffle/
+   */
+  UNSAFE_shuffle = () => {
     this._tiles = this._tiles.sort(() => Math.random() - 0.5);
     this._tiles.forEach((tile, index) => {
       if (index === this._tiles.length - 1) {
@@ -80,12 +86,39 @@ export class Board {
     });
   };
 
+  /**
+   * A simple workaround for the shuffle algorithm to be used for now.
+   * The way this works is: after generating a map, the algorithms makes a number
+   * of moves on the board so that the board is somewhat randomised.
+   */
+  shuffle = (p5: P5) => {
+    this._tiles.forEach((tile, index) => {
+      if (index === this._tiles.length - 1) {
+        tile.isEmpty = true;
+      }
+    });
+    this.updateBlankPosition();
+
+    // Performing a random move N times.
+    for (let i = 0; i < 1; i++) {
+      const { x, y } = this._blankPosition;
+      const neighbours = [
+        this.getTile(x, y - 1), // top
+      ];
+      console.log(neighbours);
+      const randomCol = Math.floor(Math.random() * this._columns);
+      const randomRow = Math.floor(Math.random() * this._rows);
+      this.move(randomCol, randomRow, p5);
+    }
+  };
+
   getTile = (col: number, row: number) => {
     return this._tiles[col + row * this._rows];
   }
 
   move = (col: number, row: number, p5: P5) => {
     const tile = this.getTile(col, row);
+    console.log("Making a move", col, row)
     if (tile.isEmpty) {
       console.log('This tile cannot be moved as it is empty.');
       return;

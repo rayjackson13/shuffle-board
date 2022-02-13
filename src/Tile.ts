@@ -39,7 +39,11 @@ export class Tile {
   draw = (p5: P5) => {
     p5.strokeWeight(4);
     p5.stroke(0);
-    p5.rect(this._position.x, this._position.y, this._size.x, this._size.y);
-    p5.image(this._image, this._position.x, this._position.y);
+    const canvasPosition = {
+      x: this._position.x * this.size.x,
+      y: this._position.y * this.size.y,
+    }
+    p5.rect(canvasPosition.x, canvasPosition.y, this._size.x, this._size.y);
+    p5.image(this._image, canvasPosition.x, canvasPosition.y);
   };
 }
