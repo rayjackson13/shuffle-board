@@ -4,7 +4,7 @@ import { Board } from './Board';
 import './styles.css';
 
 // OG: https://images.unsplash.com/photo-1643691781299-8490f12b2f11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800&q=80
-const IMG_URL = 'https://source.unsplash.com/random/800x800?q=80&fit=crop';
+const IMG_URL = 'https://source.unsplash.com/random/800x800/?business,flower,happy,travel,nature&q=80&fit=crop';
 
 const sketch = (p5: P5) => {
   const size = {

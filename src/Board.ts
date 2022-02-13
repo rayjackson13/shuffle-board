@@ -118,7 +118,7 @@ export class Board {
     this.updateBlankPosition();
 
     // Performing a random move N times.
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1; i++) {
       const { x, y } = this._blankPosition;
 
       // Getting array of existing neighbours.
