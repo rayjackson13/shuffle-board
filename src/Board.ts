@@ -87,8 +87,6 @@ export class Board {
       };
       tile.draw(p5);
     });
-
-    console.log('is solved', this.isSolved);
   };
 
   /**
@@ -120,7 +118,7 @@ export class Board {
     this.updateBlankPosition();
 
     // Performing a random move N times.
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 100; i++) {
       const { x, y } = this._blankPosition;
 
       // Getting array of existing neighbours.
@@ -143,15 +141,14 @@ export class Board {
 
   move = (col: number, row: number, p5: P5) => {
     const tile = this.getTile(col, row);
-    console.log("Making a move", col, row)
     if (tile.isEmpty) {
-      console.log('This tile cannot be moved as it is empty.');
+      console.warn('This tile cannot be moved as it is empty.');
       return;
     }
 
     const isNeighbour = this.isNeighboringBlank(col, row);
     if (!isNeighbour) {
-      console.log('This tile cannot be moved as it is blocked by other tiles.');
+      console.warn('This tile cannot be moved as it is blocked by other tiles.');
       return;
     }
 
